@@ -45,5 +45,14 @@ class FrontController extends AbstractController //heritage
             "prenomTwig" => $prenomController
         ]);
     }
+
+#[Route('/home', name: 'home')]
+
+    public function home(): Response
+    {
+        return $this->render('home/home.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 } 
 //on n'ajoute rien en dessous !
