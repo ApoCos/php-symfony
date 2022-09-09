@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block h1 %}
+	{{ produit.titre|capitalize}}
+{% endblock %}
+
+{% block body %}
+
+
+	{{ produit.titre }}
+	<h3>{{ produit.prix}} $ </h3>
+
+	<p>{{ produit.description}}</p>
+
+<a class="btn btn-warning my-3" href="{{ path('catalogue')}}">Retour</a>
+
+
+
+{% endblock %}

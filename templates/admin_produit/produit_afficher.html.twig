@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BACK OFFICE | gestion des produits
+{% endblock %}
+
+{% block h1 %}Gestion des produits
+{% endblock %}
+
+{% block body %}
+
+	{#
+	Il existe une variable d'environnement (un tableau) en twig:
+	==> app
+	
+	contient :
+	utilisateur connecté : app.user
+	flashes
+	#}
+	{% for notification in app.flashes('success') %}
+		<div class="alert.alert-success text-center col-md-6 mx-auto">
+			{{ notification }}
+		</div>
+	{% endfor %}
+
+	<a class="btn btn-success" href="{{ path('produit_ajouter') }}">
+		AJOUTER
+	</a>
+
+	{% if produits is not empty %}
+		{# {% if produits is not empty %} #}
+
+		<table class="table table-striped text-center mt-3">
+			<thead>
+				<!--Entête*-->
+				<th>Id</th>
+				<th>Titre</th>
+				<th>Prix</th>
+				<th>Description</th>
+				<th>Catégorie</th>
+				<th>Matière</th>
+				<th>Modifier</th>
+				<th>Suprimer</th>
+			</thead>
+
+			<tbody>
+				<!--on vient récupérer dynamiquement les éléments présents en bdd-->
+				{#
+				        Produit est un tableau d'objets
+				        un tableau se boucle
+				        à chaque tour de boucle on extrait un produit
+				
+				        On affiche
+				        #}
+					{% for produit in produits %}
+
+					{# <pre>
+					                {{ dump($produit) }}
+					            </pre> #}
+						<tr><td>{{ produit.id }}
+						</td><td>{{ produit.titre|capitalize }}
+						</td><td>{{ produit.prix }}
+						</td>
+							<td>
+								{% if produit.description %}
+								{{ produit.description|capitalize }}
+							{% else %}
+								<span class="text-danger fst-italic">N.P</span>
+							{% endif %}
+						</td>
+						<td>
+							{{ produit.relation.nom|capitalize}}
+						</td>
+                                                <td>
+                            {% for matiere in produit.matieres %}
+                                {{ matiere.nom}}
+                            {% endfor %}
+                        </td>
+						<td>
+							<!--on indique qu'on veut modifier cet id precisement-->
+							<a
+								href="{{ path( 'produit_modifier' , {'id' : produit.id} )}}">
+								<!--le 2e argument est un tableau dans le lequel on indique ce que l'on souhaite et on lui dit où aller le chercher-->
+								<i class="text-info" data-feather="edit"></i>
+							</a>
+						</td>
+						<td>
+							<a href="{{ path( 'produit_supprimer' , {'id' : produit.id} )}}" {#on securise la suppression #} onclick="return confirm('Etes-vous sûr de vouloir supprimer ce produit ?')">
+								<i class="text-danger" data-feather="trash"></i>
+							</a>
+						</td>
+
+					</tr>
+				{% endfor %}
+
+			</tbody>
+
+		</table>
+
+	{% else %}
+		<h4 class="text-danger fst-italic mt-3 text-center">
+			Aucun produit
+		</h4>
+
+	{% endif %}
+
+{% endblock %}

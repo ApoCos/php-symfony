@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	| CATALOGUE |
+{% endblock %}
+
+{% block h1 %}
+	Catalogue des produits
+{% endblock %}
+
+{% block body %}
+
+	{% for produit in produits %}
+
+
+    <a href="{{ path('fiche_produit', {'id' : produit.id} )  }}" class="btn btn-secondary" style="width: 16rem; margin: 10px;">
+        <div class="card-body">
+            <h5 class="card-title">{{produit.titre|capitalize}}</h5>
+            <p class="card-text">{{produit.prix}}</p>
+        </div>
+    </a>
+
+    
+
+	{% endfor %}
+
+{% endblock %}

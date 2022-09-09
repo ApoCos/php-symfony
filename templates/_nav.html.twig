@@ -8,16 +8,29 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/home">Home</a>
+					<a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/front">Link</a>
+					<a class="nav-link" href="{{ path('front') }}">Link</a>
 				</li>
-
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('produit_afficher') }}">Produits</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_admin_categorie_index') }}">Catégories</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_admin_matiere_index') }}">Matières</a>
+				</li>
 				{#
-				la fonction path() permet de rediriger sur des liens internes du site
+				la fonction twig path() permet de rediriger sur des liens internes du site
 				1er argument obligatoire : le NOM de la route
-				2e argument facultatif : tableau
+				2e argument facultatif : tableau des paramètres
+
+				tablea en php 
+					[key => value]
+				tableau en twig
+					{key : value}
 				#}
 			</ul>
 		</div>

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }}BACK OFFICE | Ajouter des produits{% endblock %}
+
+{% block h1 %}Ajouter des produits{% endblock %}
+
+{% block body %}
+
+<a class="btn btn-warning my-3" href="{{ path('produit_afficher')}}">Retour</a>
+
+    {#
+        La fonction twig form() permet d'appeler l'intégralité du formulaire
+        de la balise ouvrante <form> à la balise fermante </form>
+    #}
+
+    <div class="col-md-8 mx-auto">
+        {{form_start(formProduit)}} {# début du formulaire : balise ouvrante <form> #}
+        {# 
+            {{ form_help(formProduit.titre)}}
+            {{ form_widget(formProduit.titre)}}
+            {{ form_label(formProduit.titre)}}
+            {{ form_errors(formProduit.titre)}} 
+        #}
+
+            <div class ="row">
+                <div class="col-md-6">{{ form_row(formProduit.titre)}}</div>
+                <div class="col-md-6">{{ form_row(formProduit.prix)}}</div>
+            </div>
+
+            {{ form_row(formProduit.description)}}
+            {{ form_row(formProduit.relation)}}
+            {{ form_row(formProduit.matieres)}}
+
+            {{ form_rest(formProduit)}}
+
+            <input type="submit" value="Ajouter" class="btn btn-danger">
+
+        {{form_end(formProduit)}} {# fin du formulaire : balise fermante </form> #}
+    </div>
+    {#
+        formulaire.element
+        objet.propriété
+    #}
+
+{% endblock %}
